@@ -1,0 +1,56 @@
+.sidebar {
+    background: #2d3436;
+    height: 97vh;
+    border-radius: 1rem;
+  }
+  
+  .heading {
+    font-size: 21px;
+    font-family: "DM Sans", sans-serif;
+    color: #e7e3e3;
+    font-weight: 700;
+  }
+  
+  .side-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 20px 0px;
+  }
+  
+  .side-list a {
+    text-decoration: none;
+    color: rgb(177 172 172 / 95%);
+    font-size: 18px;
+    font-weight: 400;
+    font-family: "poppins";
+  }
+  .list-items i {
+    color: rgb(177 172 172 / 95%);
+  }
+  
+  .list-items:hover {
+    background-color: rgb(27, 24, 24);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+  }
+  .list-items:hover i,
+  .list-items:hover a {
+    color: white;
+    transition: ease-in 0.2s;
+  }
+  .list-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .list {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px;
+  }

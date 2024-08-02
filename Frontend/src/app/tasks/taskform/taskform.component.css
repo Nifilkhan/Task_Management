@@ -1,0 +1,107 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 17%;
+    left: 40%;
+    z-index: 1;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+input[type="text"],
+textarea,
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 120px;
+    overflow-y: scroll;
+}
+
+textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.toggle-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.form-group label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.overlay{
+    width: 100%;
+    height: 100%;
+    background-color:rgb(10 10 10 / 31%); /* Semi-transparent gray */
+    backdrop-filter: blur(2px);
+    position: absolute;
+    top: 0;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "task management backend",
+  "main": "service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon service",
+    "dev": "nodemon service"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-handler": "^0.0.3",
+    "body-parser": "^1.20.2",
+    "cores": "^0.8.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "nodemon": "^3.1.4"
+  }
+}

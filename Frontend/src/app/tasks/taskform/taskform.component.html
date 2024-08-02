@@ -1,0 +1,30 @@
+<div *ngIf="showForm">
+    <div class="overlay" (click)="close()"></div>
+    <div class="form-container">
+      <h2>Create a Task</h2>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="Enter task title" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            placeholder="e.g., Watch a video about Next.js Auth"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" />
+        </div>
+        <div class="form-group toggle-group">
+          <label>Toggle Important <input type="checkbox" /></label>
+        </div>
+        <div class="form-group">
+          <button type="submit">+ Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

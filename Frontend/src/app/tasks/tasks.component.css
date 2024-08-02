@@ -1,0 +1,55 @@
+.tasks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .task-content {
+    width: 100%;
+    height: auto;
+  }
+  .card {
+    background-color: whitesmoke;
+    padding: 15px;
+    gap: 10px;
+  }
+  .task-title {
+    font-size: 25px;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .task-description {
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .task-progres {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .task-progres a {
+    flex: 1;
+  }
+  
+  .task-edit a,
+  .task-progres a {
+    color: #000;
+    font-size: 15px;
+  }
+  .card-add-tag {
+    max-height: 100%;
+    height: 20vh;
+    background: rgba(255, 255, 255, 0.11);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px dotted rgba(255, 255, 255, 0.3);
+  }
+  
+  .card-add-tag i,
+  a {
+    font-size: 1rem;
+  }
