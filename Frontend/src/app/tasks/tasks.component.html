@@ -1,0 +1,32 @@
+<div class="tasks py-2">
+  <!-- @for (item of tasks; track $index) { -->
+  <div *ngFor="let item of tasks; let i = index" class="task-content">
+    <div class="card">
+      <span class="task-title">{{ item.title }}</span>
+      <p class="task-description">{{ item.taskDescription }}</p>
+      <span class="task-date">{{ item.taskDueDate }}</span>
+      <div class="task-progress d-flex flex-row gap-5">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" [style.backgroundColor]="getStatusColor(item.status)">
+            {{item.status}}
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'Completed',$event)">Completed</a></li>
+            <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'In Progress',$event)">In Progress</a></li>
+            <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'Important',$event)">Important</a></li>
+          </ul>
+        </div>
+        <div class="task-edit d-flex flex-row gap-4">
+          <button class="edit-task " (click)="getTask(item)" >
+            Edit
+          </button>
+          <button class="delete-task" (click)="deleteTask(item._id!)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+<!-- } -->
+  </div>
+
+<app-taskform [showForm]="isFormVisible" (hideForm)="closeForm()" [data]="task"></app-taskform>

@@ -1,0 +1,39 @@
+/*sidebar*/
+.main-container {
+  padding: 10px;
+}
+.main {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.main-content {
+  background: #2d3436;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  /* height: 97vh; */
+}
+
+  .card-add-tag {
+    max-height: 100%;
+    height: 20vh;
+    background: rgba(255, 255, 255, 0.11);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px dotted rgba(255, 255, 255, 0.3);
+  }
+
+
+/*sidebar*/
+
+/*main content*/
+
+
+/*main content*/

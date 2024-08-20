@@ -1,0 +1,42 @@
+.tasks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .task-content {
+    width: 100%;
+    height: auto;
+  }
+  .card {
+    background-color: whitesmoke;
+    padding: 15px;
+    gap: 10px;
+  }
+  .task-title {
+    font-size: 25px;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .task-description {
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .delet-task {
+    padding: 5px 15px;
+    font-size: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(218, 61, 13);
+  }
+  
+  .edit-task {
+    padding: 5px 15px;
+    font-size: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(230, 184, 60);
+  }
+

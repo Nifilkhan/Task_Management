@@ -1,0 +1,31 @@
+.main-header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .main-header {
+    color: white;
+    max-width: 155px;
+    border-bottom: 2px solid #c6e01cb0;
+    width: 100%;
+  }
+  
+  .task-button {
+    max-width: 100%;
+    width: 100%;
+    padding: 8px 16px;
+    gap: 10px;
+    background: none;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .task-button:hover {
+    background: linear-gradient(50deg, #353434, #16f08e);
+    transition: ease-in 0.1s;
+    border: none;
+  }
