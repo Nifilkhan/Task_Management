@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TaskformComponent } from './taskform/taskform.component';
 import { AddtaskServicesTsService } from '../services/addtask.services.ts.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { TasksService } from '../services/tasks.service';
 import { ApiResponse, Task } from '../shared/model/taskModel';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -15,14 +16,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./tasks.component.css'], 
 })
 export class TasksComponent implements OnInit, OnDestroy {
+ status: 'Completed' | 'In-Progress' | 'Important'|null=null;
   isFormVisible: boolean = false;
   tasks: Task[] = []; 
   task!: Task;
   isButtonVisible: boolean = false;
 
-  toggleButton(taskId: string | undefined ,newState: 'Completed' | 'In Progress' | 'Important',event:Event) {
+  toggleButton(taskId: string | undefined ,newState: 'Completed' | 'In-Progress' | 'Important',event:Event) {
     if(taskId){
-      const task = this.tasks.find(t => t._id === taskId);
+      const task = this.tasks.find(task => task._id === taskId);
     if(task) {
       task.status = newState;
         console.log(task);
@@ -40,19 +42,23 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   private formVisibilitySubscription: Subscription = new Subscription();
+  private routeSubscription: Subscription = new Subscription(); 
+
 
   constructor(
     private formVisibilityService: AddtaskServicesTsService,
-    private taskService: TasksService
+    private taskService: TasksService,
+    private route: ActivatedRoute
   ) {
     
   }
 
   ngOnInit(): void {
-    this.formVisibilitySubscription = this.formVisibilityService.isFormVisibleChange.subscribe(
-      (isVisible) => (this.isFormVisible = isVisible)
-    );
-    this.loadTasks();
+    this.route.params.subscribe(params => {
+      this.status = params['status']; 
+      this.loadTasks();
+     });
+        this.formVisibilitySubscription = this.formVisibilityService.isFormVisibleChange.subscribe((isVisible) => (this.isFormVisible = isVisible));
   }
 
   ngOnDestroy(): void {
@@ -60,7 +66,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   loadTasks(): void {
-    this.taskService.getAllTasks(null).subscribe({
+    this.taskService.getAllTasks(this.status).subscribe({
       next: (response: ApiResponse<Task[]>) => {
         this.tasks = response.tasks
         ;
@@ -99,16 +105,14 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.loadTasks();
   }
 
-  getStatusColor(status: 'Completed' | 'In Progress' | 'Important'): string {
+  getStatusColor(status: 'Completed' | 'In-Progress' | 'Important'): string {
     switch (status) {
       case 'Completed':
         return '#4CAF50';
-      case 'In Progress':
+      case 'In-Progress':
         return '#FFC107'; 
       case 'Important':
         return '#F44336'; 
-      default:
-        return '#ffffff'; 
     }
   }
 }

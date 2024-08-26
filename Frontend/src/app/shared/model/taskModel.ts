@@ -8,6 +8,6 @@ export interface Task {
     title:string,
     taskDescription:string,
     taskDueDate:string,
-    status: 'Completed' | 'In Progress' | 'Important',
+    status: 'Completed' | 'In-Progress' | 'Important',
     buttonVisibility:boolean,
 }

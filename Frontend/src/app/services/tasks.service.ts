@@ -11,9 +11,10 @@ export class TasksService {
 
   constructor(private http: HttpClient) {}
 
-  getAllTasks(status: string |null): Observable<ApiResponse<Task[]>> {
-    return this.http.post<ApiResponse<Task[]>>(
-      `${this.apiUrl}/alltasks`,{status}
+  getAllTasks(status: 'Completed' | 'In-Progress' | 'Important' |null): Observable<ApiResponse<Task[]>> {
+    const url = `${this.apiUrl}/alltasks`;
+    console.log('Sending request with status:', status); 
+    return this.http.post<ApiResponse<Task[]>>( url ,{status}
     );
   }
 

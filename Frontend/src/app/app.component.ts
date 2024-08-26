@@ -6,7 +6,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
 import { HeaderComponent } from './header/header.component';
 import { CardComponent } from "./shared/card/card.component";
-import { CompletedComponent } from './completed/completed.component';
 
 @Component({
   selector: 'app-root',

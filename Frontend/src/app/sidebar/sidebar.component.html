@@ -8,14 +8,16 @@
           <i class="fa-solid fa-house"></i><a routerLink="/all-tasks">All Tasks</a>
         </li>
         <li class="list-items p-2" (click)="UpdateText('Completed')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-square-check"></i><a routerLink="/completed">Complete</a>
+          <i class="fa-solid fa-square-check"></i><a routerLink="/all-tasks/Completed">Complete</a>
         </li>
         <li class="list-items p-2" (click)="UpdateText('In Progress')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-pen-to-square"></i><a routerLink="/in-progress">In Progress</a>
+          <i class="fa-solid fa-pen-to-square"></i><a routerLink="/all-tasks/In-Progress">In Progress</a>
         </li>
         <li class="list-items p-2" (click)="UpdateText('Important')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-circle-exclamation"></i><a routerLink="/important">Important</a>
+          <i class="fa-solid fa-circle-exclamation"></i><a routerLink="/all-tasks/Important">Important</a>
         </li>
       </ul>
     </div>
   </app-card>
+
+  

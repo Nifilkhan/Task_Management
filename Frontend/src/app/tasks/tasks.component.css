@@ -1,84 +1,163 @@
 .tasks {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.task-content {
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  background-color: whitesmoke;
+  padding: 15px;
+  gap: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-title {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+
+.task-description {
+  font-size: 15px;
+  font-weight: 400;
+  color: #555;
+}
+
+.task-progress {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.status,
+.delete-task,
+.edit-task {
+  padding: 5px 15px;
+  font-size: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status {
+  background-color: green;
+  color: white;
+}
+
+.delete-task {
+  background-color: #da3d0d;
+  color: white;
+}
+
+.edit-task {
+  background-color: #e6b83c;
+  color: white;
+}
+
+.task-edit a,
+.task-progress a {
+  color: #000;
+  font-size: 15px;
+}
+
+.card-add-tag {
+  max-height: 100%;
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px dotted rgba(255, 255, 255, 0.3);
+}
+
+.card-add-tag i,
+a {
+  font-size: 1rem;
+}
+
+.btn {
+  padding: 5px 5px !important;
+  font-size: 12px !important;
+  border: none !important;
+  outline: none;
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 1350px) {
+  .tasks {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .task-content {
-    width: 100%;
-    height: auto;
+}
+
+@media (max-width: 1200px) {
+  .tasks {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .card {
-    background-color: whitesmoke;
-    padding: 15px;
-    gap: 10px;
+}
+
+@media (max-width: 992px) {
+  .tasks {
+    grid-template-columns: repeat(2, 1fr);
   }
+
   .task-title {
-    font-size: 25px;
-    font-weight: 500;
-    font-family: "Poppins", sans-serif;
+    font-size: 22px;
   }
-  
+
   .task-description {
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 14px;
   }
-  
-  .task-progres {
-    display: flex;
-    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .tasks {
+    grid-template-columns: 1fr;
   }
 
-  .status {
-    padding: 5px 10px;
-    font-size: 10px;
-    border: none;
-    border-radius: 30px;
-    background-color: green;
+  .task-title {
+    font-size: 20px;
   }
 
-  .delete-task {
-    padding: 5px 15px;
-    font-size: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(218, 61, 13);
+  .task-description {
+    font-size: 13px;
   }
-  
+
+  .task-progress,
+  .task-edit {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .status,
+  .delete-task,
   .edit-task {
-    padding: 5px 15px;
-    font-size: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(230, 184, 60);
+    width: 100%;
+    margin-bottom: 10px;
   }
-  .task-progres a {
-    flex: 1;
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 10px;
   }
-  
-  .task-edit a,
-  .task-progres a {
-    color: #000;
-    font-size: 15px;
+
+  .task-title {
+    font-size: 18px;
   }
-  .card-add-tag {
-    max-height: 100%;
-    background: rgba(255, 255, 255, 0.11);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px dotted rgba(255, 255, 255, 0.3);
+
+  .task-description {
+    font-size: 12px;
   }
-  
-  .card-add-tag i,
-  a {
-    font-size: 1rem;
-  }
-  
+
   .btn {
-    padding: 5px 5px !important;
     font-size: 10px !important;
-    border: none !important;
-    outline: none;
   }
+}

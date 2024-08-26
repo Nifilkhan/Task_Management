@@ -1,5 +1,4 @@
 <div class="tasks py-2">
-  <!-- @for (item of tasks; track $index) { -->
   <div *ngFor="let item of tasks; let i = index" class="task-content">
     <div class="card">
       <span class="task-title">{{ item.title }}</span>
@@ -12,7 +11,7 @@
           </button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'Completed',$event)">Completed</a></li>
-            <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'In Progress',$event)">In Progress</a></li>
+            <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'In-Progress',$event)">In Progress</a></li>
             <li><a class="dropdown-item" href="#" (click)="toggleButton(item._id,'Important',$event)">Important</a></li>
           </ul>
         </div>
@@ -26,7 +25,6 @@
         </div>
       </div>
     </div>
-<!-- } -->
   </div>
 
 <app-taskform [showForm]="isFormVisible" (hideForm)="closeForm()" [data]="task"></app-taskform>

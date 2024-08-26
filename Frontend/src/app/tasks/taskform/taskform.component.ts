@@ -17,6 +17,7 @@ export class TaskformComponent implements OnChanges{
   @Input() showForm: boolean = false;  
   @Output() hideForm = new EventEmitter<void>();
   tasksForm: FormGroup;
+  // isButtonFalse: boolean = true;
 
   constructor(private fb:FormBuilder,private tasksService:TasksService) {
     this.tasksForm = this.fb.group({
@@ -26,21 +27,28 @@ export class TaskformComponent implements OnChanges{
       status: new  FormControl('',[Validators.required])
     })
   }
-  ngOnChanges(): void {
-    if(this.data) {
-    this.tasksForm.patchValue({
-      title: this.data?.title,
-      taskDescription: this.data?.taskDescription,
-      taskDueDate: this.data?.taskDueDate,
-      status: this.data?.status
-    });
-  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      if (this.data) {
+        this.tasksForm.patchValue({
+          title: this.data.title,
+          taskDescription: this.data.taskDescription,
+          taskDueDate: this.data.taskDueDate,
+          status: this.data.status
+        });
+      } else {
+        this.tasksForm.reset({
+          title: '',
+          taskDescription: '',
+          taskDueDate: '',
+          status: ''
+        });
+      }
+    }
   }
 
-  taskTile = '';
-  taskSummary = '';
-  taskDueDate = '';
-  status = '';
   
   close() {
     this.hideForm.emit();
@@ -51,18 +59,23 @@ export class TaskformComponent implements OnChanges{
         this.tasksService.updateTask(this.data._id as string ,this.tasksForm.value).subscribe({
           next:(response) => {
             this.close();
+            this.tasksForm.reset();
           }
         })
       } else {
         this.tasksService.createTask(this.tasksForm.value).subscribe({
           next:(response) => {
             this.close();
+            this.tasksForm.reset();
           }
         })
       }
     }else {
       this.tasksForm.markAllAsTouched()
     }
+  }
+  get isEditMode(): boolean {
+    return !!this.data;
   }
 
 }

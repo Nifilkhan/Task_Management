@@ -17,6 +17,7 @@ export class SidebarComponent {
 
   UpdateText (text:string) {
     this.headerChange.emit(text);
-
   }
+
+  
 }
