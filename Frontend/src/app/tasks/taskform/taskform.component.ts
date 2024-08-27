@@ -17,7 +17,6 @@ export class TaskformComponent implements OnChanges{
   @Input() showForm: boolean = false;  
   @Output() hideForm = new EventEmitter<void>();
   tasksForm: FormGroup;
-  // isButtonFalse: boolean = true;
 
   constructor(private fb:FormBuilder,private tasksService:TasksService) {
     this.tasksForm = this.fb.group({
@@ -31,25 +30,23 @@ export class TaskformComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
-      if (this.data) {
-        this.tasksForm.patchValue({
-          title: this.data.title,
-          taskDescription: this.data.taskDescription,
-          taskDueDate: this.data.taskDueDate,
-          status: this.data.status
-        });
-      } else {
-        this.tasksForm.reset({
-          title: '',
-          taskDescription: '',
-          taskDueDate: '',
-          status: ''
-        });
-      }
+      this.updateForm();
     }
   }
 
-  
+  updateForm(): void {
+    if (this.data) {
+      this.tasksForm.patchValue({
+        title: this.data.title,
+        taskDescription: this.data.taskDescription,
+        taskDueDate: this.data.taskDueDate,
+        status: this.data.status
+      });
+    } else {
+      this.tasksForm.reset();
+    }
+  }
+
   close() {
     this.hideForm.emit();
   }
