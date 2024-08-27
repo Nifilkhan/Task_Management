@@ -2,18 +2,18 @@
   <div *ngFor="let item of tasks; let i = index" class="task-content">
     <div class="card">
       <span class="task-title">{{ item.title }}</span>
-      <p class="task-description d-flex flex-column">
+      <p class="task-description d-flex flex-column hidden-scrollbar">
         <!-- Display truncated or full description based on `showMore` -->
         {{ item.taskDescription.length > characterlength ? 
            (item.showMore ? item.taskDescription : (item.taskDescription.slice(0, characterlength) + '...')) : 
            item.taskDescription }}
+      </p>
       <!-- Show more/less link only if the description is long -->
-      <a *ngIf="item.taskDescription.length > characterlength" 
+      <a class="more-details " *ngIf="item.taskDescription.length > characterlength" 
          href="#" 
          (click)="toggleTextContent(item); $event.preventDefault()">
          {{ item.showMore ? 'Show Less' : 'Show More' }}
       </a>
-      </p>
       <span class="task-date">{{ item.taskDueDate }}</span>
       <div class="task-progress d-flex flex-row gap-5">
         <div class="dropdown">
@@ -33,7 +33,7 @@
           <button class="delete-task" (click)="deleteTask(item._id!)">
             Delete
 
-            
+
           </button>
         </div>
       </div>
