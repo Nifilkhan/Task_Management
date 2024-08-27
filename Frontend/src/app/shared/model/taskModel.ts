@@ -10,4 +10,6 @@ export interface Task {
     taskDueDate:string,
     status: 'Completed' | 'In-Progress' | 'Important',
     buttonVisibility:boolean,
+    isTextHidden?: boolean,
+    showMore? :boolean
 }

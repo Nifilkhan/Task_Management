@@ -20,7 +20,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   isFormVisible: boolean = false;
   tasks: Task[] = []; 
   task!: Task;
-  isButtonVisible: boolean = false;
+  characterlength: number = 24;
 
   toggleButton(taskId: string | undefined ,newState: 'Completed' | 'In-Progress' | 'Important',event:Event) {
     if(taskId){
@@ -68,7 +68,10 @@ export class TasksComponent implements OnInit, OnDestroy {
   loadTasks(): void {
     this.taskService.getAllTasks(this.status).subscribe({
       next: (response: ApiResponse<Task[]>) => {
-        this.tasks = response.tasks
+        this.tasks = response.tasks.map(task => ( {
+          ...task,
+          isTextHidden : true
+        }))
         ;
       },
       error: (err) => {
@@ -113,6 +116,13 @@ export class TasksComponent implements OnInit, OnDestroy {
         return '#FFC107'; 
       case 'Important':
         return '#F44336'; 
+    }
+  }
+
+
+  toggleTextContent(task: Task): void {
+    if(task.taskDescription.length > this.characterlength){
+    task.showMore = !task.showMore;
     }
   }
 }
