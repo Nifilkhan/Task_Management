@@ -1,7 +1,7 @@
 <div *ngIf="showForm">
   <div class="overlay" (click)="close()"></div>
   <div class="form-container">
-    <h2>Create a Task</h2>
+    <h2>{{isEditMode ? 'Update task' :'Create task'}}</h2>
     <form [formGroup]="tasksForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="title">Title</label>
@@ -38,7 +38,7 @@
       <div class="form-group">
         <select class="select" formControlName="status">
           <option value="" disabled selected>Select Status</option>
-          <option value="In Progress">In Progress</option>
+          <option value="In-Progress">In Progress</option>
           <option value="Completed">Completed</option>
           <option value="Important">Important</option>
         </select>

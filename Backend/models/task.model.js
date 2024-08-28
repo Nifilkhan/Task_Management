@@ -18,7 +18,6 @@ const TaskManagement = mongoose.Schema(
       type:String,
       required:true,
       enum:["Important", "Completed", "In-Progress"],
-      default:"In Progress"
     }
   },
   {

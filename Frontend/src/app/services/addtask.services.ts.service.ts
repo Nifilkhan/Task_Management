@@ -1,20 +1,21 @@
 import { Injectable,EventEmitter} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddtaskServicesTsService {
 
-  isFormVisibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  isFormVisible = false;
+  private formVisibilitySubject = new BehaviorSubject<boolean>(false);
+
+  isFormVisible$ = this.formVisibilitySubject.asObservable();
   
   toggleForm() {
-    this.isFormVisible = !this.isFormVisible;
-    this.isFormVisibleChange.emit(this.isFormVisible);
+    const currentVisiblility = this.formVisibilitySubject.value;
+    this.formVisibilitySubject.next(!currentVisiblility);
   }
 
   setFormVisibility(isVisible: boolean) {
-    this.isFormVisible = isVisible;
-    this.isFormVisibleChange.emit(this.isFormVisible);
+    this.formVisibilitySubject.next(isVisible);
   }
 }

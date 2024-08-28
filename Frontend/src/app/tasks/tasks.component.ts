@@ -7,11 +7,14 @@ import { ApiResponse, Task } from '../shared/model/taskModel';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { PageNotfoundComponent } from "../page-notfound/page-notfound.component";
+
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskformComponent, HttpClientModule, CommonModule],
+  imports: [TaskformComponent, HttpClientModule, CommonModule, PageNotfoundComponent],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'], 
 })
@@ -19,27 +22,9 @@ export class TasksComponent implements OnInit, OnDestroy {
  status: 'Completed' | 'In-Progress' | 'Important'|null=null;
   isFormVisible: boolean = false;
   tasks: Task[] = []; 
-  task!: Task;
+  task: Task | null = null;
   characterlength: number = 24;
-
-  toggleButton(taskId: string | undefined ,newState: 'Completed' | 'In-Progress' | 'Important',event:Event) {
-    if(taskId){
-      const task = this.tasks.find(task => task._id === taskId);
-    if(task) {
-      task.status = newState;
-        console.log(task);
-        this.taskService.updateTaskStatus(taskId, task.status).subscribe({
-          next: (response: ApiResponse<Task>) => {
-            console.log('Task updated successfully');
-          },
-          error: (err) => {
-            console.error('Error updating task', err);
-          }
-      });
-      }
-  
-  }
-  }
+  taskLoaded: boolean = false;
 
   private formVisibilitySubscription: Subscription = new Subscription();
   private routeSubscription: Subscription = new Subscription(); 
@@ -49,8 +34,15 @@ export class TasksComponent implements OnInit, OnDestroy {
     private formVisibilityService: AddtaskServicesTsService,
     private taskService: TasksService,
     private route: ActivatedRoute
-  ) {
-    
+  ) {}
+
+  toggleButton(taskId: string | undefined, newState: 'Completed' | 'In-Progress' | 'Important', event: Event) {
+    if (taskId) {
+      const task = this.tasks.find(task => task._id === taskId);
+      if (task) {
+          this.upadteTaskStatus(task, newState);
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -58,7 +50,10 @@ export class TasksComponent implements OnInit, OnDestroy {
       this.status = params['status']; 
       this.loadTasks();
      });
-        this.formVisibilitySubscription = this.formVisibilityService.isFormVisibleChange.subscribe((isVisible) => (this.isFormVisible = isVisible));
+        this.formVisibilitySubscription = this.formVisibilityService.isFormVisible$
+        .subscribe(isVisible => {
+          this.isFormVisible = isVisible;
+        });
   }
 
   ngOnDestroy(): void {
@@ -72,7 +67,7 @@ export class TasksComponent implements OnInit, OnDestroy {
           ...task,
           isTextHidden : true
         }))
-        ;
+        this.taskLoaded=true;
       },
       error: (err) => {
         console.error('Error fetching tasks', err);
@@ -80,13 +75,40 @@ export class TasksComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteTask(id:string ):void{
-    this.taskService.deleteTask(id).subscribe({
-      next: (response: ApiResponse<Task>) => {
-        this.loadTasks();
+  upadteTaskStatus(task: Task,newState: 'Completed' | 'In-Progress' | 'Important'): void {
+    task.status = newState;
+    this.taskService.updateTaskStatus(task._id as string,task.status).subscribe({
+      next:(response: ApiResponse<Task>) => {
+        Swal.fire('Success', `Task status updated to "${newState}".`, 'success');
+        console.log('Task status updated successfully');
       },
       error: (err) => {
-        console.error('Error deleting task', err);
+        console.error('Error updating task status', err);
+        Swal.fire('Error', 'Failed to update task status.', 'error');
+      }
+    })
+  }
+  deleteTask(id:string ):void{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) =>{
+      if(result.isConfirmed){
+        this.taskService.deleteTask(id).subscribe({
+          next: (response: ApiResponse<Task>) => {
+            this.loadTasks();
+            Swal.fire('success','Task deleted successfully!','success');
+          },
+          error: (err) => {
+            console.error('Error deleting task', err);
+            Swal.fire('Error','Failed to delete task!','error');
+          }
+        })
       }
     })
   }
@@ -106,6 +128,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   closeForm(): void {
     this.formVisibilityService.setFormVisibility(false);
     this.loadTasks();
+    this.task = null;
   }
 
   getStatusColor(status: 'Completed' | 'In-Progress' | 'Important'): string {

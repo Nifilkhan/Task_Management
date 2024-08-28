@@ -1,21 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .error { 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    font-family: 'Roboto', sans-serif;
     font-size: 35px;
-    color: aliceblue;
-    position: absolute;
-    top: 30%;
-    left: 20%;
-    z-index: 2;
+    color: rgba(233, 38, 31, 0.726);
+    width:100%;
 }
 
-.overlay {
-    width: 100%;
-    height: 100%;
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
-    top: 0;
-    background-color: black;
-    
+    width: 100%;
+    top: 40%;
+    left: 0;    
+    z-index: 10;
+    pointer-events: none;
+}
+
+.img-responsive {
+    width: 90px;
 }

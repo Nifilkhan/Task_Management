@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@a
 import { ReactiveFormsModule } from '@angular/forms';
 import { TasksService } from '../../services/tasks.service';
 import { Task } from '../../shared/model/taskModel';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-taskform',
@@ -40,12 +41,16 @@ export class TaskformComponent implements OnChanges{
         title: this.data.title,
         taskDescription: this.data.taskDescription,
         taskDueDate: this.data.taskDueDate,
-        status: this.data.status
+        status: this.data.status || ''
       });
     } else {
-      this.tasksForm.reset();
+      this.tasksForm.reset({
+        status:'Select'
+      });
     }
   }
+  
+
 
   close() {
     this.hideForm.emit();
@@ -57,6 +62,7 @@ export class TaskformComponent implements OnChanges{
           next:(response) => {
             this.close();
             this.tasksForm.reset();
+            Swal.fire('success','Task UpdatedSuccessfully!','success');
           }
         })
       } else {
@@ -64,6 +70,7 @@ export class TaskformComponent implements OnChanges{
           next:(response) => {
             this.close();
             this.tasksForm.reset();
+            Swal.fire('success','Task Created Successfully!','success');
           }
         })
       }

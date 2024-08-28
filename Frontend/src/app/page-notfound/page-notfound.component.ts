@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 @Component({
-  selector: 'app-page-notfound',
+  selector: 'app-no-task',
   standalone: true,
   imports: [RouterModule],
   templateUrl: './page-notfound.component.html',
