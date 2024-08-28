@@ -1,16 +1,13 @@
-
 <div class="main-container">
   <div class="main">
-<app-sidebar (headerChange)="onHeaderChange($event)"></app-sidebar>
+    <app-sidebar (headerChange)="onHeaderChange($event)"></app-sidebar>
 
-<div class="main-content py-2 px-3">
-  <app-header [headerText]="headerText"></app-header>
-  <router-outlet />
-  </div>
+    <div class="main-content py-2 px-3">
+      <router-outlet>
+        <app-header></app-header>
+      </router-outlet>
+    </div>
   </div>
 </div>
 
-
-<app-taskform ></app-taskform>
-
-
+<app-taskform></app-taskform>
