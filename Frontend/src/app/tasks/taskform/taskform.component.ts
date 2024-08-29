@@ -19,6 +19,7 @@ export class TaskformComponent implements OnChanges{
   @Output() hideForm = new EventEmitter<void>();
   tasksForm: FormGroup;
 
+  //handle the form data and its validation
   constructor(private fb:FormBuilder,private tasksService:TasksService) {
     this.tasksForm = this.fb.group({
       title: new  FormControl('',[Validators.required]),
@@ -35,6 +36,7 @@ export class TaskformComponent implements OnChanges{
     }
   }
 
+  //updating the form values when the component receives a new input data
   updateForm(): void {
     if (this.data) {
       this.tasksForm.patchValue({
@@ -55,21 +57,25 @@ export class TaskformComponent implements OnChanges{
   close() {
     this.hideForm.emit();
   }
+
+  //method for submitting the form data for the task creation and update
   onSubmit() {
     if(this.tasksForm.valid){
       if(this.data) {
+        //updating the task  with the id  _id as string  from the data object  passed to the component
         this.tasksService.updateTask(this.data._id as string ,this.tasksForm.value).subscribe({
           next:(response) => {
             this.close();
-            this.tasksForm.reset();
+            this.tasksForm.reset(); //after the task has been created the form is reset
             Swal.fire('success','Task UpdatedSuccessfully!','success');
           }
         })
       } else {
+        //creating the task
         this.tasksService.createTask(this.tasksForm.value).subscribe({
           next:(response) => {
             this.close();
-            this.tasksForm.reset();
+            this.tasksForm.reset(); //after the task has been created the form is reset
             Swal.fire('success','Task Created Successfully!','success');
           }
         })

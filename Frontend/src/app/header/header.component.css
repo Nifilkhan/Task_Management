@@ -29,3 +29,11 @@
     transition: ease-in 0.1s;
     border: none;
   }
+
+  @media (max-width: 355px) {
+    .task-button {
+        min-height: 41px;
+        padding: 5px;
+    }
+
+  }

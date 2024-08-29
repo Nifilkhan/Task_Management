@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit} from '@angular/core';
 import { AddtaskServicesTsService } from '../services/addtask.services.ts.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ActivatedRoute } from '@angular/router';
@@ -10,20 +10,21 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent{
   constructor(
     private formVisibilityService: AddtaskServicesTsService,
     private route: ActivatedRoute
   ) {}
-   headerText: string = 'All Tasks';
+  @Input() headerText: string = 'All Tasks';
+   isSidebarVisible: boolean = false;
 
-   ngOnInit(): void {
-    this.route.params.subscribe({
-      next:((params) => {
-        if(params['status']) this.headerText = params['status'];
-      }),
-      error:(error) => {console.log(error)}
-    });
+   handleSidebarToggle(isVisible: boolean) {
+    this.isSidebarVisible = isVisible;
+  }
+
+  handleItemSelected(text: string) {
+    this.headerText = text; // Update header text
+    this.isSidebarVisible = false; // Hide sidebar after selection
   }
 
   toggleForm() {

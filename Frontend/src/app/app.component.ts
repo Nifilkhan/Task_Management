@@ -16,8 +16,13 @@ import { CardComponent } from "./shared/card/card.component";
 })
 export class AppComponent {
   headerText: string = 'All Tasks';
-  
+  isSidebarVisible: boolean = false;
+
   onHeaderChange(newHeaderText: string) {
     this.headerText = newHeaderText;
+  }
+
+  onSidebarToggle(isVisible: boolean) {
+    this.isSidebarVisible = isVisible;
   }
 }

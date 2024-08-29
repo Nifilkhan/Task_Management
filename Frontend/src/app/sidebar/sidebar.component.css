@@ -1,47 +1,112 @@
-  .heading {
-    font-size: 21px;
-    font-family: "DM Sans", sans-serif;
-    color: #e7e3e3;
-    font-weight: 700;
-  }
-  
-  .side-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 20px 0px;
-  }
-  
-  .side-list a {
-    text-decoration: none;
-    color: rgb(177 172 172 / 95%);
-    font-size: 18px;
-    font-weight: 400;
-    font-family: "poppins";
-  }
-  .list-items i {
-    color: rgb(177 172 172 / 95%);
-  }
-  
-  .list-items {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-  
-  .list {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    padding: 0px 15px;
+/* Container styles to manage layout of sidebar and main content */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+  background: #2d3436;
+  width: 240px;
+  height: 100vh;
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.show-sidebar {
+  transform: translateX(0);
+}
+
+.toggle-btn {
+  display: none; /* Hidden by default, shown on smaller screens */
+  background-color: #4caf4f85;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 50;
+}
+
+.toggle-btn:hover {
+  background-color: #45a049;
+}
+
+.main-task {
+  flex: 1; /* Take the remaining space */
+  padding: 20px;
+  background-color: #f1f1f1;
+  overflow: auto;
+}
+
+.heading {
+  font-size: 21px;
+  font-family: "DM Sans", sans-serif;
+  color: #e7e3e3;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+  align-items: center;
+}
+
+.side-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 20px 0px;
+}
+
+.side-list a {
+  text-decoration: none;
+  color: rgb(177 172 172 / 95%);
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "poppins";
+}
+
+.list-items i {
+  color: rgb(177 172 172 / 95%);
+}
+
+.list-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.active-item {
+  background-color: rgb(27, 24, 24);
+  border-radius: 10px;
+  color: #f7f3f3;
+  font-weight: bold;
+}
+
+@media (max-width: 880px) {
+  .toggle-btn {
+    display: block; /* Show toggle button on smaller screens */
   }
 
-  .active-item {
-    background-color: rgb(27, 24, 24);
-    border-radius: 10px;
-    color: #f7f3f3;
-    font-weight: bold;
+  .sidebar {
+    transform: translateX(-100%); /* Hide sidebar by default on smaller screens */
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+  }
+
+  .sidebar.show-sidebar {
+    transform: translateX(0);
+  }
+
+  .main-task {
+    flex: 1; /* Take full width when sidebar is hidden */
+    margin-left: 0;
+  }
 }

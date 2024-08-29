@@ -1,23 +1,23 @@
-  <app-card>
-    <span class="heading d-lg-flex justify-content-center py-4"
-      >Task Management</span
-    >
-    <div class="list">
-      <ul class="side-list m-0 px-2">
-        <li class="list-items p-2" (click)="UpdateText('All Tasks')" routerLinkActive="active-item" [routerLinkActiveOptions]="{ exact: true }">
-          <i class="fa-solid fa-house"></i><a routerLink="/all-tasks">All Tasks</a>
-        </li>
-        <li class="list-items p-2" (click)="UpdateText('Completed')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-square-check"></i><a routerLink="/all-tasks/Completed">Complete</a>
-        </li>
-        <li class="list-items p-2" (click)="UpdateText('In Progress')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-pen-to-square"></i><a routerLink="/all-tasks/In-Progress">In Progress</a>
-        </li>
-        <li class="list-items p-2" (click)="UpdateText('Important')" routerLinkActive="active-item" >
-          <i class="fa-solid fa-circle-exclamation"></i><a routerLink="/all-tasks/Important">Important</a>
-        </li>
-      </ul>
-    </div>
-  </app-card>
+<!-- Button to toggle the sidebar visibility -->
+<button (click)="toggleSidebar()" class="toggle-btn"><i class="fa-solid fa-bars"></i></button>
 
-  
+<!-- Sidebar container -->
+<div [ngClass]="{'show-sidebar': isSidebarVisible}" class="sidebar">
+  <span class="heading">Task Management</span>
+  <div class="list">
+    <ul class="side-list m-0 px-2">
+      <li class="list-items p-2" (click)="UpdateText('All Tasks')" routerLinkActive="active-item" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa-solid fa-house"></i><a routerLink="/all-tasks">All Tasks</a>
+      </li>
+      <li class="list-items p-2" (click)="UpdateText('Completed')" routerLinkActive="active-item">
+        <i class="fa-solid fa-square-check"></i><a routerLink="/all-tasks/Completed">Complete</a>
+      </li>
+      <li class="list-items p-2" (click)="UpdateText('In Progress')" routerLinkActive="active-item">
+        <i class="fa-solid fa-pen-to-square"></i><a routerLink="/all-tasks/In-Progress">In Progress</a>
+      </li>
+      <li class="list-items p-2" (click)="UpdateText('Important')" routerLinkActive="active-item">
+        <i class="fa-solid fa-circle-exclamation"></i><a routerLink="/all-tasks/Important">Important</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -121,7 +121,7 @@ a {
 }
 
 /* Media Queries for Responsiveness */
-/* 
+
 @media (max-width: 1350px) {
   .tasks {
     grid-template-columns: repeat(3, 1fr);
@@ -147,6 +147,8 @@ a {
     font-size: 14px;
   }
 }
+
+
 
 @media (max-width: 768px) {
   .tasks {
@@ -191,4 +193,4 @@ a {
   .btn {
     font-size: 10px !important;
   }
-} */
+}

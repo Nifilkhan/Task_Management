@@ -39,11 +39,14 @@ export class TasksComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
 
+
+  //status changing toggle button for single task
   toggleButton(
     taskId: string | undefined,
     newState: 'Completed' | 'In-Progress' | 'Important',
     event: Event
   ) {
+    event.preventDefault();
     if (taskId) {
       const task = this.tasks.find((task) => task._id === taskId);
       if (task) {
@@ -67,6 +70,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.formVisibilitySubscription.unsubscribe();
   }
 
+  //load tasks method from status based or null(all tasks)
   loadTasks(): void {
     this.taskService.getAllTasks(this.status).subscribe({
       next: (response: ApiResponse<Task[]>) => {
@@ -82,6 +86,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     });
   }
 
+  //updating method of all task
   upadteTaskStatus(
     task: Task,
     newState: 'Completed' | 'In-Progress' | 'Important'
@@ -91,11 +96,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       .updateTaskStatus(task._id as string, task.status)
       .subscribe({
         next: (response: ApiResponse<Task>) => {
-          Swal.fire(
-            'Success',
-            `Task status updated to "${newState}".`,
-            'success'
-          );
           console.log('Task status updated successfully');
         },
         error: (err) => {
@@ -104,6 +104,8 @@ export class TasksComponent implements OnInit, OnDestroy {
         },
       });
   }
+
+  //deleting the task
   deleteTask(id: string): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -129,22 +131,26 @@ export class TasksComponent implements OnInit, OnDestroy {
     });
   }
 
+  //showing the task in edit mode
   getTask(data: Task) {
     this.task = data;
     this.isFormVisible = true;
   }
 
+  //form visibility for the task
   toggleFormVisibility(event: MouseEvent): void {
     event.preventDefault();
     this.formVisibilityService.toggleForm();
   }
 
+  //close form visibility
   closeForm(): void {
     this.formVisibilityService.setFormVisibility(false);
     this.loadTasks();
     this.task = null;
   }
 
+  //method for changing the status color 
   getStatusColor(status: 'Completed' | 'In-Progress' | 'Important'): string {
     switch (status) {
       case 'Completed':
@@ -156,6 +162,7 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
   }
 
+  //showing more or less content in the description
   toggleTextContent(task: Task): void {
     if (task.taskDescription.length > this.characterlength) {
       task.showMore = !task.showMore;
